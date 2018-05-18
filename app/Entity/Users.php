@@ -1,13 +1,26 @@
 <?php
 
-namespace App;
+namespace App\Entity;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
+class Users extends Authenticatable
 {
     use Notifiable;
+
+    /**
+     * 与模型关联的数据表
+     *
+     * @var string
+     */
+    protected $table = 'users';
+
+    /**
+     * 可以通过 $primaryKey 属性，重新定义主键字段
+     * @var string
+     */
+    protected $primaryKey = 'user_id';
 
     /**
      * The attributes that are mass assignable.
