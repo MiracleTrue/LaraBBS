@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Topic extends Model
 {
-    protected $fillable = ['title', 'body', 'user_id', 'category_id', 'reply_count', 'view_count', 'last_reply_user_id', 'order', 'excerpt', 'slug'];
+    protected $fillable = ['title', 'body', 'category_id', 'excerpt', 'slug'];
 
     public function category()
     {
@@ -19,7 +19,8 @@ class Topic extends Model
     public function scopeWithOrder($query, $order)
     {
         // 不同的排序，使用不同的数据读取逻辑
-        switch ($order) {
+        switch ($order)
+        {
             case 'recent':
                 $query->recent();
                 break;
