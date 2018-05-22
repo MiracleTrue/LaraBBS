@@ -5,7 +5,8 @@
             <li class="media">
                 <div class="media-left">
                     <a href="{{ route('users.show', [$topic->user_id]) }}">
-                        <img class="media-object img-thumbnail" style="width: 52px; height: 52px;" src="{{ $topic->user->avatar }}" title="{{ $topic->user->name }}">
+                        <img class="media-object img-thumbnail" style="width: 52px; height: 52px;"
+                             src="{{ $topic->user->avatar }}" title="{{ $topic->user->name }}">
                     </a>
                 </div>
 
@@ -15,14 +16,15 @@
                         <a href="{{ route('topics.show', [$topic->id]) }}" title="{{ $topic->title }}">
                             {{ $topic->title }}
                         </a>
-                        <a class="pull-right" href="{{ route('topics.show', [$topic->id]) }}" >
+                        <a class="pull-right" href="{{ route('topics.show', [$topic->id]) }}">
                             <span class="badge"> {{ $topic->reply_count }} </span>
                         </a>
                     </div>
 
                     <div class="media-body meta">
 
-                        <a href="#" title="{{ $topic->category->name }}">
+                        <a href="{{ route('category.show', $topic->category->id) }}"
+                           title="{{ $topic->category->name }}">
                             <span class="glyphicon glyphicon-folder-open" aria-hidden="true"></span>
                             {{ $topic->category->name }}
                         </a>
@@ -48,5 +50,5 @@
     </ul>
 
 @else
-    <div class="empty-block">暂无数据 ~_~ </div>
+    <div class="empty-block">暂无数据 ~_~</div>
 @endif

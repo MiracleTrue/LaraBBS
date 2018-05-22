@@ -10,3 +10,15 @@ php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 打开 config/debugbar.php，将 enabled 的值设置为：
 'enabled' => env('APP_DEBUG', false),
 
+
+2.导航的 Active 状态
+composer require "hieu-le/active:~3.5"
+函数:
+function active_class($condition, $activeClass = 'active', $inactiveClass = '')
+使用:
+{{ active_class((if_route('category.show') && if_route_param('category', 1))) }}
+
+
+
+
+
