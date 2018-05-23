@@ -18,11 +18,21 @@ function active_class($condition, $activeClass = 'active', $inactiveClass = '')
 使用:
 {{ active_class((if_route('category.show') && if_route_param('category', 1))) }}
 
+
 3. 安装 HTMLPurifier for Laravel 5 ( XSS攻击 用户提交数据过滤器)
 使用 Composer 安装：
 composer require "mews/purifier:~2.0"
 命令行下运行
 php artisan vendor:publish --provider="Mews\Purifier\PurifierServiceProvider"
+
+
+4.图片验证码扩展包 mews/captcha
+使用 Composer 安装：
+composer require "mews/captcha:~2.0"
+运行以下命令生成配置文件 config/captcha.php：
+php artisan vendor:publish --provider='Mews\Captcha\CaptchaServiceProvider'
+
+
 
 
 

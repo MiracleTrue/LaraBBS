@@ -9,11 +9,6 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         //
@@ -21,6 +16,6 @@ class UserPolicy
 
     public function update(User $currentUser, User $user)
     {
-        return $currentUser->user_id === $user->user_id;
+        return $currentUser->id === $user->id;
     }
 }
