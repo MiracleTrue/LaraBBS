@@ -20,5 +20,4 @@
 @endif
 
 {{-- 分页 --}}
-{{--{!! $topics->render() !!}--}}
-{{ $topics->links() }}
+{!! $topics->appends(Request::except('page'))->links() !!}
