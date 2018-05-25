@@ -1,4 +1,8 @@
-必备插件
+后台运行:
+npm run watch-poll &
+php artisan horizon &
+
+必备插件:
 
 -.安装 Debugbar
 使用 Composer 安装：
