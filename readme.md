@@ -60,3 +60,17 @@ php artisan horizon
 安装了 Horizon 以后，我们将使用 horizon 命令来启动队列系统和任务监控，无需使用 queue:listen。
 
 
+-.使用 Laravel-permission 扩展包,权限和角色控制
+composer require "spatie/laravel-permission:~2.7"
+生成数据库迁移文件：
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="migrations"
+php artisan migrate
+生成配置信息：
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider" --tag="config"
+数据表：
+roles —— 角色的模型表；
+permissions —— 权限的模型表；
+model_has_roles —— 模型与角色的关联表，用户拥有什么角色在此表中定义，一个用户能拥有多个角色；
+role_has_permissions —— 角色拥有的权限关联表，如管理员拥有查看后台的权限都是在此表定义，一个角色能拥有多个权限；
+model_has_permissions —— 模型与权限关联表，一个模型能拥有多个权限。
+

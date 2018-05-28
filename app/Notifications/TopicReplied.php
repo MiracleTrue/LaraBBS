@@ -13,10 +13,10 @@ class TopicReplied extends Notification implements ShouldQueue
     use Queueable;
 
     public $reply;
+
     /**
-     * Create a new notification instance.
-     *
-     * @return void
+     * TopicReplied constructor.
+     * @param Reply $reply
      */
     public function __construct(Reply $reply)
     {
