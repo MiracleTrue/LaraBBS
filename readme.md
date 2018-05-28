@@ -2,6 +2,14 @@
 npm run watch-poll &
 php artisan horizon &
 
+.env文件详解:
+APP_NAME=                                     //项目名称
+APP_ENV=                                      //开发: local    测试: testing    预上线: staging    正式环境: production
+APP_KEY=                                      //php artisan key:generate 生成
+APP_DEBUG=                                    //开启Debug:true   关闭Debug:false 生产环境必须关闭
+APP_LOG_LEVEL=                                //日志记录的等级默认记录全部 debug 生成环境应该为:error
+APP_URL=                                      //项目的Url地址  http://www.xxx.com
+
 必备插件:
 
 -.安装 Debugbar
@@ -73,4 +81,22 @@ permissions —— 权限的模型表；
 model_has_roles —— 模型与角色的关联表，用户拥有什么角色在此表中定义，一个用户能拥有多个角色；
 role_has_permissions —— 角色拥有的权限关联表，如管理员拥有查看后台的权限都是在此表定义，一个角色能拥有多个权限；
 model_has_permissions —— 模型与权限关联表，一个模型能拥有多个权限。
+
+
+-.用户切换工具 sudo-su
+composer require "viacreative/sudo-su:~1.1"
+添加 Provider :
+app/Providers/AppServiceProvider.php
+    public function register()
+    {
+        if (app()->isLocal()) {
+            $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
+        }
+    }
+发布资源文件:
+php artisan vendor:publish --provider="VIACreative\SudoSu\ServiceProvider"
+resources/views/layouts/app.blade.php
+    @if (app()->isLocal())
+        @include('sudosu::user-selector')
+    @endif
 
