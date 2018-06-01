@@ -8469,31 +8469,37 @@ body {
 
 /* Topic Index Page */
 
-.topics-index-page .category-show-page .topic-list .nav > li > a {
+.topics-index-page .topic-list .nav > li > a,
+.category-show-page .topic-list .nav > li > a {
   position: relative;
   display: block;
   padding: 5px 14px;
   font-size: 0.9em;
 }
 
-.topics-index-page .category-show-page .topic-list a {
+.topics-index-page .topic-list a,
+.category-show-page .topic-list a {
   color: #444444;
 }
 
-.topics-index-page .category-show-page .topic-list .meta {
+.topics-index-page .topic-list .meta,
+.category-show-page .topic-list .meta {
   font-size: 0.9em;
   color: #b3b3b3;
 }
 
-.topics-index-page .category-show-page .topic-list .meta a {
+.topics-index-page .topic-list .meta a,
+.category-show-page .topic-list .meta a {
   color: #b3b3b3;
 }
 
-.topics-index-page .category-show-page .topic-list .badge {
+.topics-index-page .topic-list .badge,
+.category-show-page .topic-list .badge {
   background-color: #d8d8d8;
 }
 
-.topics-index-page .category-show-page .topic-list hr {
+.topics-index-page .topic-list hr,
+.category-show-page .topic-list hr {
   margin-top: 12px;
   margin-bottom: 12px;
   border: 0;
