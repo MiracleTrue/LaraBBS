@@ -1,4 +1,4 @@
-后台运行:
+服务器后台运行的服务:
 npm run watch-poll &
 php artisan horizon &
 
@@ -10,10 +10,29 @@ APP_DEBUG=                                    //开启Debug:true   关闭Debug:f
 APP_LOG_LEVEL=                                //日志记录的等级默认记录全部 debug 生成环境应该为:error
 APP_URL=                                      //项目的Url地址  http://www.xxx.com
 
+API_STANDARDS_TREE=                           //x 本地开发的或私有环境的   prs 未对外发布的，提供给公司 app，单页应用，桌面应用等  vnd 对外发布的，开放给所有用户
+API_SUBTYPE=                                  //我们项目的简称，我们的项目叫larabbs
+API_PREFIX or API_DOMAIN=                     //我们可以为 API 添加一个前缀 通过 www.larabbs.com/api 来访问 API。 或者有可能单独配置一个子域名api.larabbs.com !!!前缀和子域名，两者有且只有一个!!!
+API_VERSION=                                  //默认的 API 版本，当我们没有传 Accept 头的时候，默认访问该版本的 API。一般情况下配置 v1 即可。
+API_DEBUG=                                    //测试环境，打开 debug，方便我们看到错误信息，定位错误。
+
 必备插件:
+**将所有配置文件 publish 出来
+**php artisan vendor:publish
+
+-.安装 Laravel-ide-helper
+composer require barryvdh/laravel-ide-helper
+
+添加对应配置到 .gitignore 文件中：
+.idea
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+以下命令生成代码对应文档：
+php artisan ide-helper:generate
 
 -.安装 Debugbar
-使用 Composer 安装：
 composer require "barryvdh/laravel-debugbar:~3.1" --dev
 
 生成配置文件，存放位置 config/debugbar.php：
@@ -21,6 +40,13 @@ php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 
 打开 config/debugbar.php，将 enabled 的值设置为：
 'enabled' => env('APP_DEBUG', false),
+
+-.安装 DingoAPI
+你必须在你的项目中修改 composer.json 文件并且运行 composer update 命令来加载这个包的最新版本。
+"require": {
+    "dingo/api": "2.0.0-alpha1"
+}
+php artisan vendor:publish --provider="Dingo\Api\Provider\LaravelServiceProvider"
 
 
 -.导航的 Active 状态

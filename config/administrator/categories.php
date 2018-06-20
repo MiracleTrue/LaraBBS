@@ -54,7 +54,7 @@ return [
         ],
     ],
     'rules'   => [
-        'name' => 'required|min:1|unique:categories'
+        'name' => 'required|min:1|unique:category'
     ],
     'messages' => [
         'name.unique'   => '分类名在数据库里有重复，请选用其他名称。',
