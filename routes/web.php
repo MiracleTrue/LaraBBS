@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('test', 'Controller@test')->name('test');
+
 
 Route::get('/', 'TopicsController@index')->name('root');
 

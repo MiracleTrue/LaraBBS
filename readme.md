@@ -9,6 +9,7 @@ APP_KEY=                                      //php artisan key:generate 生成
 APP_DEBUG=                                    //开启Debug:true   关闭Debug:false 生产环境必须关闭
 APP_LOG_LEVEL=                                //日志记录的等级默认记录全部 debug 生成环境应该为:error
 APP_URL=                                      //项目的Url地址  http://www.xxx.com
+DEBUGER_ENABLE=                               //是否开启 Debugbar
 
 API_STANDARDS_TREE=                           //x 本地开发的或私有环境的   prs 未对外发布的，提供给公司 app，单页应用，桌面应用等  vnd 对外发布的，开放给所有用户
 API_SUBTYPE=                                  //我们项目的简称，我们的项目叫larabbs
@@ -39,7 +40,7 @@ composer require "barryvdh/laravel-debugbar:~3.1" --dev
 php artisan vendor:publish --provider="Barryvdh\Debugbar\ServiceProvider"
 
 打开 config/debugbar.php，将 enabled 的值设置为：
-'enabled' => env('APP_DEBUG', false),
+'enabled' => env('DEBUGER_ENABLE', false),
 
 -.安装 DingoAPI
 你必须在你的项目中修改 composer.json 文件并且运行 composer update 命令来加载这个包的最新版本。
@@ -126,3 +127,7 @@ resources/views/layouts/app.blade.php
         @include('sudosu::user-selector')
     @endif
 
+-.安装 easy-sms
+composer require "overtrue/easy-sms"
+php artisan make:provider EasySmsServiceProvider
+教程:https://laravel-china.org/courses/laravel-advance-training-5.5/791/sms-provider
