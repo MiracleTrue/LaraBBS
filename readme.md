@@ -23,7 +23,7 @@
 php artisan vendor:publish
 ```
 
-######安装 Laravel-ide-helper
+###### 安装 Laravel-ide-helper
 ```
 composer require barryvdh/laravel-ide-helper
 添加对应配置到 .gitignore 文件中：
