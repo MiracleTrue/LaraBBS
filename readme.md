@@ -6,6 +6,51 @@
 - `npm run watch-poll &`
 - `php artisan horizon &`
 
+##### 常用 artisan 命令
+```
+//创建模型 & 数据填充 & 控制器
+php artisan make:model Models/{模型名称} -mf         //模型 & 工厂
+php artisan make:seeder {模型名称}Seeder             //数据填充名称一般为模型复数名
+php artisan make:controller {控制器名称}Controller   //控制器名称一般为模型复数名
+
+//创建验证器
+php artisan make:request {验证器名称}Request
+
+//创建任务
+php artisan make:job {任务名称}
+
+//快速创建事件与绑定监听器
+app/Providers/EventServiceProvider.php  //listen 数组包含所有的事件（键）以及事件对应的监听器（值）来注册所有的事件监听器
+php artisan event:generate
+
+//创建事件
+php artisan make:event {事件名称}
+
+//创建监听器
+php artisan make:listener UpdateProductSoldCount --event=OrderPaid
+
+//创建通知类
+php artisan make:notification OrderPaidNotification
+
+//创建授权策略类
+php artisan make:policy {模型名称}Policy   //OrderPolicy
+
+//创建队列失败表
+php artisan queue:failed-table
+
+//将所有配置文件 publish 出来
+php artisan vendor:publish
+
+//重命名工厂文件之后需要执行 ，否则会找不到对应的工厂文件。
+composer dumpautoload
+
+//清除配置文件缓存
+php artisan config:clear
+
+php artisan config:cache
+```
+
+
 ##### .env文件详解:
 ###### 基础
 - APP_NAME=`项目名称`
