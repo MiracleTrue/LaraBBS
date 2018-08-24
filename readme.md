@@ -261,3 +261,9 @@ composer require "overtrue/easy-sms"
 php artisan make:provider EasySmsServiceProvider
 教程:https://laravel-china.org/courses/laravel-advance-training-5.5/791/sms-provider
 ```
+
+###### 安装 gregwar/captcha 用于接口的图片验证码
+```
+composer require gregwar/captcha
+
+```
