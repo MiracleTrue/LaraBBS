@@ -1,12 +1,51 @@
-##### 项目部署
-- `mv .env.example .env`
-- `php artisan key:generate`
+## 项目部署
+```
+//Linux服务器环境要求
+支持Laravel 5.5 | PHP7.1 | MySql5.7 | Redis3.2
+Composer | Git客户端 | crond服务 | Supervisor进程管理工具
 
-##### 服务器后台运行的服务:
-- `npm run watch-poll &`
-- `php artisan horizon &`
+//安装
+composer install
 
-##### 常用 artisan 命令
+//crond服务
+crontab -e 添加
+* * * * * php /{项目绝对路径根目录}/artisan schedule:run >> /dev/null 2>&1    保存
+crontab -u root -l   查看
+
+//配置 env
+cp .env.example .env
+php artisan key:generate
+
+//静态资源软链接
+sudo php artisan storage:link
+
+//运行 Laravel Mix
+yarn config set registry https://registry.npm.taobao.org
+SASS_BINARY_SITE=http://npm.taobao.org/mirrors/node-sass yarn
+
+//生产环境数据数据迁移
+php artisan migrate:refresh
+php artisan db:seed --class=AdminTablesSeeder
+php artisan db:seed --class=ConfigsSeeder
+
+//开发环境数据数据迁移(含测试数据)
+php artisan ide-helper:generate
+php artisan migrate:refresh --seed
+
+//后台菜单和权限修改
+database\seeds\AdminTablesSeeder.php 中修改后
+php artisan admin:make UsersController --model=App\\Models\\User
+php artisan db:seed --class=AdminTablesSeeder
+
+//后台系统设置构建
+database\seeds\ConfigsSeeder.php 中修改后
+php artisan db:seed --class=ConfigsSeeder
+```
+##### 服务器后台运行的服务: 生产环境进程管理工具 Supervisor 
+- `npm run watch-poll`
+- `php artisan horizon`
+
+## 常用 artisan 命令
 ```
 //创建模型 & 数据填充 & 控制器
 php artisan make:model Models/{模型名称} -mf         //模型 & 工厂
@@ -50,8 +89,31 @@ php artisan config:clear
 php artisan config:cache
 ```
 
+## API接口 设计规范
+###### Restful HTTP 返回状态码解释
+- 200 OK - 对成功的 GET、PUT、PATCH 或 DELETE 操作进行响应。也可以被用在不创建新资源的 POST 操作上
+- 201 Created - 对创建新资源的 POST 操作进行响应。应该带着指向新资源地址的 Location 头
+- 202 Accepted - 服务器接受了请求，但是还未处理，响应中应该包含相应的指示信息，告诉客户端该去哪里查询关于本次请求的信息
+- 204 No Content - 对不会返回响应体的成功请求进行响应（比如 DELETE 请求）
+- 304 Not Modified - HTTP缓存header生效的时候用
+- 400 Bad Request - 请求异常，比如请求中的body无法解析
+- 401 Unauthorized - 没有进行认证或者认证非法
+- 403 Forbidden - 服务器已经理解请求，但是拒绝执行它
+- 404 Not Found - 请求一个不存在的资源
+- 405 Method Not Allowed - 所请求的 HTTP 方法不允许当前认证用户访问
+- 410 Gone - 表示当前请求的资源不再可用。当调用老版本 API 的时候很有用
+- 415 Unsupported Media Type - 如果请求中的内容类型是错误的
+- 422 Unprocessable Entity - 用来表示校验错误
+- 429 Too Many Requests - 由于请求频次达到上限而被拒绝访问
+- 500 Internal Server Error - 服务器内部错误
+###### Restful HTTP 请求动词描述操作
+- GET    - 获取资源，单个或多个
+- POST   - 创建资源
+- PUT	 - 更新资源，客户端提供完整的资源数据
+- PATCH	 - 更新资源，客户端提供部分的资源数据
+- DELETE - 删除资源
 
-##### .env文件详解:
+## .env文件详解:
 ###### 基础
 - APP_NAME=`项目名称`
 - APP_ENV=`开发:local 测试:testing 预上线:staging 正式环境: production`
@@ -60,6 +122,8 @@ php artisan config:cache
 - APP_LOG_LEVEL=`日志记录的等级默认记录全部 debug 生成环境应该为:error`
 - APP_URL=`项目的Url地址  http://www.xxx.com`
 - DEBUGBAR_ENABLED=`是否开启 Debugbar`
+
+## Composer 已安装插件:
 ###### Dingo API
 - API_STANDARDS_TREE=`x 本地开发的或私有环境的   prs 未对外发布的，提供给公司 app，单页应用，桌面应用等  vnd 对外发布的，开放给所有用户`
 - API_SUBTYPE=`我们项目的简称，我们的项目叫larabbs`
