@@ -12,11 +12,23 @@ class TopicRequest extends Request
      */
     public function rules()
     {
-        return [
-            'title' => 'required|string',
-            'body' => 'required|string',
-            'category_id' => 'required|exists:category,id',
-        ];
+        switch ($this->method())
+        {
+            case 'POST':
+                return [
+                    'title' => 'required|string',
+                    'body' => 'required|string',
+                    'category_id' => 'required|exists:category,id',
+                ];
+                break;
+            case 'PATCH':
+                return [
+                    'title' => 'string',
+                    'body' => 'string',
+                    'category_id' => 'exists:category,id',
+                ];
+                break;
+        }
     }
 
     public function attributes()

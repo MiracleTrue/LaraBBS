@@ -3,20 +3,20 @@
 namespace App\Providers;
 
 use Carbon\Carbon;
+use Dingo\Api\Facade\API;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap any application services.
-     *
      * @return void
      */
     public function boot()
-	{
-		\App\Models\User::observe(\App\Observers\UserObserver::class);
-		\App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
-		\App\Models\Topic::observe(\App\Observers\TopicObserver::class);
+    {
+        \App\Models\User::observe(\App\Observers\UserObserver::class);
+        \App\Models\Reply::observe(\App\Observers\ReplyObserver::class);
+        \App\Models\Topic::observe(\App\Observers\TopicObserver::class);
         \App\Models\Link::observe(\App\Observers\LinkObserver::class);
 
         // Carbon 中文化配置
@@ -25,14 +25,22 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Register any application services.
-     *
      * @return void
      */
     public function register()
     {
         //
-        if (app()->isLocal()) {
+        if (app()->isLocal())
+        {
             $this->app->register(\VIACreative\SudoSu\ServiceProvider::class);
         }
+
+        API::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            abort(404);
+        });
+
+        API::error(function (\Illuminate\Auth\Access\AuthorizationException $exception) {
+            abort(403, $exception->getMessage());
+        });
     }
 }
