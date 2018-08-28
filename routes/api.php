@@ -29,6 +29,8 @@ $api->version('v1', [
         'limit' => config('api.rate_limits.sign.limit'),
         'expires' => config('api.rate_limits.sign.expires'),
     ], function ($api) {
+        /*游客可以访问的接口*/
+
         // 短信验证码
         $api->post('verificationCodes', 'VerificationCodesController@store')->name('api.verificationCodes.store');
         // 用户注册
@@ -36,11 +38,19 @@ $api->version('v1', [
         // 图片验证码
         $api->post('captchas', 'CaptchasController@store')->name('api.captchas.store');
 
-
         // 登录
         $api->post('authorizations', 'AuthorizationsController@store')->name('api.authorizations.store');/*登录授权token*/
         $api->put('authorizations/current', 'AuthorizationsController@update')->name('api.authorizations.update');/*刷新授权token*/
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')->name('api.authorizations.destroy');/*删除授权token*/
+
+
+
+
+        /*需要 token 验证的接口*/
+        $api->group(['middleware' => 'api.auth'], function ($api) {
+            // 用户
+            $api->get('user', 'UsersController@me')->name('api.user.show');/*当前登录用户信息*/
+        });
     });
 
 
