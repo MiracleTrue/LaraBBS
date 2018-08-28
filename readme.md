@@ -265,5 +265,15 @@ php artisan make:provider EasySmsServiceProvider
 ###### 安装 gregwar/captcha 用于接口的图片验证码
 ```
 composer require gregwar/captcha
+```
 
+###### 安装 jwt-auth 
+```
+composer require tymon/jwt-auth:1.0.0-rc.2
+php artisan jwt:secret
+//配置 https://laravel-china.org/courses/laravel-advance-training-5.5/793/mobile-login-api
+
+JWT_SECRET= //换这个secret 会导致之前生成的所有 token 无效。
+JWT_TTL= //生成的 token 在多少分钟后过期，默认 60 分钟
+JWT_REFRESH_TTL= //生成的 token，在多少分钟内，可以刷新获取一个新 token，默认 20160 分钟，14天。
 ```
