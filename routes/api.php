@@ -47,7 +47,6 @@ $api->version('v1', [
         $api->get('categories', 'CategoriesController@index')->name('api.categories.index');/*获取话题分类*/
 
 
-
         /*需要 token 验证的接口*/
         $api->group(['middleware' => 'api.auth'], function ($api) {
             // 用户
@@ -56,6 +55,9 @@ $api->version('v1', [
 
             // 图片资源
             $api->post('images', 'ImagesController@store')->name('api.images.store');/*用户上传图片*/
+
+            // 话题
+            $api->post('topics', 'TopicsController@store')->name('api.topics.store');/*发布话题*/
         });
     });
 
