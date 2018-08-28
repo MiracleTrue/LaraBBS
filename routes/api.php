@@ -43,6 +43,8 @@ $api->version('v1', [
         $api->put('authorizations/current', 'AuthorizationsController@update')->name('api.authorizations.update');/*刷新授权token*/
         $api->delete('authorizations/current', 'AuthorizationsController@destroy')->name('api.authorizations.destroy');/*删除授权token*/
 
+        // 话题分类
+        $api->get('categories', 'CategoriesController@index')->name('api.categories.index');/*获取话题分类*/
 
 
 
