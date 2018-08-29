@@ -50,6 +50,7 @@ $api->version('v1', [
         // 话题
         $api->get('topics', 'TopicsController@index')->name('api.topics.index');/*获取话题列表*/
         $api->get('users/{user}/topics', 'TopicsController@userIndex')->name('api.users.topics.index');/*获取某用户话题列表*/
+        $api->get('topics/{topic}', 'TopicsController@show')->name('api.topics.show');/*获取话题详情*/
 
 
         /*需要 token 验证的接口*/

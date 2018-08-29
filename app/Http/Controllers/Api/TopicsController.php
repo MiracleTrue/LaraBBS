@@ -27,7 +27,6 @@ class TopicsController extends Controller
             case 'recent':
                 $query->recent();
                 break;
-
             default:
                 $query->recentReplied();
                 break;
@@ -40,10 +39,14 @@ class TopicsController extends Controller
 
     public function userIndex(User $user, Request $request)
     {
-        $topics = $user->topics()->recent()
-            ->paginate(3);
+        $topics = $user->topics()->recent()->paginate(3);
 
         return $this->response->paginator($topics, new TopicTransformer());
+    }
+
+    public function show(Topic $topic)
+    {
+        return $this->response->item($topic, new TopicTransformer());
     }
 
     public function store(TopicRequest $request, Topic $topic)
