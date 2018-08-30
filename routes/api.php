@@ -61,6 +61,7 @@ $api->version('v1', [
             $api->get('user', 'UsersController@me')->name('api.user.show');/*当前登录用户信息*/
             $api->patch('user', 'UsersController@update')->name('api.user.update');/*编辑登录用户信息*/
             $api->get('user/notifications', 'NotificationsController@index')->name('api.user.notifications.index');/*通知列表*/
+            $api->get('user/notifications/stats', 'NotificationsController@stats')->name('api.user.notifications.stats');/*通知统计*/
 
             // 图片资源
             $api->post('images', 'ImagesController@store')->name('api.images.store');/*用户上传图片*/
