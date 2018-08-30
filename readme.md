@@ -123,13 +123,14 @@ php artisan config:cache
 - APP_URL=`项目的Url地址  http://www.xxx.com`
 - DEBUGBAR_ENABLED=`是否开启 Debugbar`
 
-## Composer 已安装插件:
 ###### Dingo API
 - API_STANDARDS_TREE=`x 本地开发的或私有环境的   prs 未对外发布的，提供给公司 app，单页应用，桌面应用等  vnd 对外发布的，开放给所有用户`
 - API_SUBTYPE=`我们项目的简称，我们的项目叫larabbs`
 - API_PREFIX or API_DOMAIN=`我们可以为 API 添加一个前缀 通过 www.larabbs.com/api 来访问 API。 或者有可能单独配置一个子域名api.larabbs.com !!!前缀和子域名，两者有且只有一个!!!`
 - API_VERSION=`默认的 API 版本，当我们没有传 Accept 头的时候，默认访问该版本的 API。一般情况下配置 v1 即可。`
 - API_DEBUG=`测试环境，打开 debug，方便我们看到错误信息，定位错误。`
+
+## Composer 已安装插件:
 ##### Composer插件:
 ```
 将所有配置文件 publish 出来
